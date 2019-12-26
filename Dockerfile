@@ -28,6 +28,9 @@ RUN chown -R nobody.nobody /run && \
 # Setup document root
 RUN mkdir -p /app
 
+# Make sure files/folders needed by the processes are accessable when they run under the nobody user
+RUN chown -R nobody.nobody /app
+
 # Make the document root a volume
 VOLUME /app
 
@@ -38,9 +41,6 @@ USER nobody
 WORKDIR /app
 #COPY --chown=nobody src/ /var/www/html/
 COPY src/ /app/
-
-# Make sure files/folders needed by the processes are accessable when they run under the nobody user
-RUN chown -R nobody.nobody /app
 
 # Expose the port nginx is reachable on
 EXPOSE 80
