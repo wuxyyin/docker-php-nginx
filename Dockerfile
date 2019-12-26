@@ -13,7 +13,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     php -r "unlink('composer-setup.php');" && \
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
-RUN apk --no-cache add php-pear php7-dev autoconf automake libtool gcc
+RUN apk --no-cache add php-pear php7-dev autoconf automake libtool gcc libc6-dev
 RUN pecl install swoole && \
     rm -rf /tmp/pear
 
