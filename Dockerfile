@@ -13,6 +13,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     php -r "unlink('composer-setup.php');" && \
     composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
+RUN pecl install swoole && \
+    rm -rf /tmp/pear
+
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
 # Remove default server definition
