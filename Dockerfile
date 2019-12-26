@@ -26,18 +26,18 @@ RUN chown -R nobody.nobody /run && \
   chown -R nobody.nobody /var/log/nginx
 
 # Setup document root
-RUN mkdir -p /var/www/html
+RUN mkdir -p /app
 
 # Make the document root a volume
-VOLUME /var/www/html
+VOLUME /app
 
 # Switch to use a non-root user from here on
 USER nobody
 
 # Add application
-WORKDIR /var/www/html
+WORKDIR /app
 #COPY --chown=nobody src/ /var/www/html/
-COPY src/ /var/www/html/
+COPY src/ /app/
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
