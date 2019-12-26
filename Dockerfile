@@ -1,5 +1,5 @@
 FROM alpine:3.10
-LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
+LABEL Maintainer="Sean Wu <wuxyyin@qq.com>" \
       Description="Lightweight container with Nginx 1.16 & PHP-FPM 7.3 based on Alpine Linux."
 
 # Install packages
@@ -39,8 +39,11 @@ WORKDIR /app
 #COPY --chown=nobody src/ /var/www/html/
 COPY src/ /app/
 
+# Make sure files/folders needed by the processes are accessable when they run under the nobody user
+RUN chown -R nobody.nobody /app
+
 # Expose the port nginx is reachable on
-EXPOSE 8080
+EXPOSE 80
 
 # Let supervisord start nginx & php-fpm
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
