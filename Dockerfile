@@ -20,27 +20,28 @@ COPY config/php.ini /etc/php7/conf.d/custom.ini
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
-RUN chown -R nobody.nobody /run && \
-  chown -R nobody.nobody /var/lib/nginx && \
-  chown -R nobody.nobody /var/tmp/nginx && \
-  chown -R nobody.nobody /var/log/nginx
+RUN chown -R nginx.nginx /run && \
+  chown -R nginx.nginx /var/lib/nginx && \
+  chown -R nginx.nginx /var/tmp/nginx && \
+  chown -R nginx.nginx /var/log/nginx
 
 # Setup document root
 RUN mkdir -p /app
 
+#COPY --chown=nobody src/ /var/www/html/
+COPY src/ /app/
+
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
-RUN chown -R nobody.nobody /app
+RUN chown -R nginx.nginx /app
 
 # Make the document root a volume
 VOLUME /app
 
 # Switch to use a non-root user from here on
-USER nobody
+USER nginx
 
 # Add application
 WORKDIR /app
-#COPY --chown=nobody src/ /var/www/html/
-COPY src/ /app/
 
 # Expose the port nginx is reachable on
 EXPOSE 8080
