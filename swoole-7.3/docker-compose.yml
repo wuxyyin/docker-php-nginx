@@ -1,0 +1,11 @@
+version: '3'
+services:
+  php:
+    image: registry.cn-hangzhou.aliyuncs.com/wuxyyin/docker-php-nginx:swoole-7.3
+    ports:
+      - 8080:8080
+    volumes:
+      - /home/app:/app
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+    restart: always
