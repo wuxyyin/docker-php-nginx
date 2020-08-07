@@ -29,7 +29,7 @@ COPY config/nginx/conf.d/ /etc/nginx/conf.d/
 
 # Configure PHP-FPM
 COPY config/fpm-pool.conf /etc/php7/php-fpm.d/www.conf
-COPY config/php.ini /etc/php7/conf.d/custom.ini
+COPY config/php/conf.d/ /etc/php7/conf.d/
 
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/supervisord.conf
