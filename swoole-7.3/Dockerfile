@@ -6,13 +6,14 @@ LABEL Maintainer="Sean Wu <wuxyyin@qq.com>" \
 RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-curl \
     php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-xmlwriter php7-ctype php7-session \
     php7-mbstring php7-gd php7-opcache php7-pcntl php7-tokenizer php7-pdo php7-pdo_mysql php7-bcmath php7-simplexml \
-    php7-posix php7-redis php7-apcu \
+    php7-posix php7-apcu \
     nginx supervisor curl
 
 # Install swoole
 RUN apk --no-cache add php-pear php7-dev gcc g++ make && \
     pecl channel-update pecl.php.net && \
     pecl install swoole && \
+    pecl install redis && \
     rm -rf /tmp/pear && \
     apk del php-pear php7-dev gcc g++ make
 
