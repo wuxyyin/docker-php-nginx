@@ -18,16 +18,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 # Install swoole
 RUN apk --no-cache add php-pear php7-dev gcc g++ make && \
     pecl channel-update pecl.php.net && \
-    wget https://github.com/edenhill/librdkafka/archive/v1.5.0.tar.gz && \
-    tar -zxf v1.5.0.tar.gz && \
-    cd librdkafka-1.5.0 && \
-    phpize && \
-    ./configure && \
-    make && \
-    make install && \
+    apk --no-cache add php-rdkafka && \
 #    pecl install swoole && \
 #    pecl install redis && \
-    pecl install rdkafka && \
+#    pecl install rdkafka && \
     rm -rf /tmp/pear && \
     apk del php-pear php7-dev gcc g++ make
 
