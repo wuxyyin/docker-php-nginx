@@ -20,8 +20,7 @@ RUN apk --no-cache add php-pear php7-dev gcc g++ make git && \
     pecl channel-update pecl.php.net && \
     git clone https://github.com/edenhill/librdkafka ./librdkafka && \
     cd ./librdkafka && \
-    /usr/bin/phpize && \
-    ./configure && \
+    ./configure --install-deps --source-deps-only && \
     make && \
     make install && \
 #    pecl install swoole && \
