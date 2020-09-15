@@ -19,7 +19,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 RUN apk --no-cache add php-pear php7-dev gcc g++ make git && \
     pecl channel-update pecl.php.net && \
     git clone https://github.com/edenhill/librdkafka.git && \
-    cd librdkafkaz && \
+    cd librdkafka && \
     phpize && \
     ./configure && \
     make && \
@@ -28,7 +28,7 @@ RUN apk --no-cache add php-pear php7-dev gcc g++ make git && \
 #    pecl install redis && \
     pecl install rdkafka && \
     rm -rf /tmp/pear && \
-    apk del php-pear php7-dev gcc g++ make
+    apk del php-pear php7-dev gcc g++ make git
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
