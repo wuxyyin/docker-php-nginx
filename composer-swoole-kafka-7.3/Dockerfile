@@ -18,8 +18,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 # Install swoole
 RUN apk --no-cache add php-pear php7-dev gcc g++ make git && \
     pecl channel-update pecl.php.net && \
-    git clone https://github.com/edenhill/librdkafka && \
-    cd librdkafka && \
+    git clone https://github.com/edenhill/librdkafka ./librdkafka && \
+    cd ./librdkafka && \
     /usr/bin/phpize && \
     ./configure && \
     make && \
