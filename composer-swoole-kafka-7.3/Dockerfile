@@ -16,12 +16,12 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 # Install rdkafka
-RUN wget https://github.com/edenhill/librdkafka/archive/v1.5.0.tar.gz && \
-    tar -zxf v1.5.0.tar.gz && \
-    cd librdkafka-1.5.0 && \
-    ./configure && \
-    make && \
-    make install
+RUN wget https://github.com/edenhill/librdkafka/archive/v1.5.0.tar.gz
+RUN tar -zxf v1.5.0.tar.gz
+RUN cd librdkafka-1.5.0
+RUN ./configure
+RUN make
+RUN make install
 
 # Install swoole
 RUN apk --no-cache add php-pear php7-dev gcc g++ make && \
