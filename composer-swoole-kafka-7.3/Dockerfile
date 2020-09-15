@@ -19,6 +19,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 RUN wget https://github.com/edenhill/librdkafka/archive/v1.5.0.tar.gz
 RUN tar -zxf v1.5.0.tar.gz
 RUN cd librdkafka-1.5.0
+RUN phpize
 RUN ./configure
 RUN make
 RUN make install
