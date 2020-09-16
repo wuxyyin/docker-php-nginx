@@ -20,7 +20,7 @@ RUN apk --no-cache add php-pear php7-dev gcc g++ make git librdkafka librdkafka-
     pecl channel-update pecl.php.net && \
 #    pecl install swoole && \
 #    pecl install redis && \
-#    pecl install rdkafka && \
+    pecl install rdkafka && \
     rm -rf /tmp/pear && \
     apk del php-pear php7-dev gcc g++ make git
 
