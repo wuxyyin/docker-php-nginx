@@ -16,13 +16,13 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 # Install swoole
-RUN apk --no-cache add php-pear php7-dev gcc g++ make git librdkafka librdkafka-dev && \
+RUN apk --no-cache add php-pear php7-dev gcc g++ make librdkafka librdkafka-dev && \
     pecl channel-update pecl.php.net && \
-#    pecl install swoole && \
-#    pecl install redis && \
+    pecl install swoole && \
+    pecl install redis && \
     pecl install rdkafka && \
     rm -rf /tmp/pear && \
-    apk del php-pear php7-dev gcc g++ make git
+    apk del php-pear php7-dev gcc g++ make
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
