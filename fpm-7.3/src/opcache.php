@@ -2,9 +2,33 @@
 
 define('THOUSAND_SEPARATOR',true);
 
+header("Content-type: text/html; charset=utf-8");
+date_default_timezone_set('Asia/shanghai');
+
+$password = md5(md5($_SERVER['PHP_AUTH_PW']) . md5('admin'). 'lEhAP4lSlm1581494378');
+/////////////////// Password protect ////////////////////////////////////////////////////////////////
+if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW']) ||
+    $_SERVER['PHP_AUTH_USER'] != 'admin' || '014b5afad4beb6367b7e89f4b74dca0d' != $password) {
+    Header("WWW-Authenticate: Basic realm=\"Admin Login\"");
+    Header("HTTP/1.0 401 Unauthorized");
+
+    echo <<<EOB
+                    <html><body>
+                    <h1>Rejected!</h1>
+                    <big>Wrong Username or Password!</big>
+                    </body></html>
+EOB;
+    exit;
+}
+
 if (!extension_loaded('Zend OPcache')) {
     echo '<div style="background-color: #F2DEDE; color: #B94A48; padding: 1em;">You do not have the Zend OPcache extension loaded, sample data is being shown instead.</div>';
-    require 'data-sample.php';
+//    require 'data-sample.php';
+    exit;
+}
+
+if (isset($_REQUEST['__opcache*reset__']) && $_REQUEST['__opcache*reset__'] == 'reset') {
+    opcache_reset();
 }
 
 class OpCacheDataModel
@@ -531,7 +555,6 @@ $dataModel = new OpCacheDataModel();
                 <label><input type="radio" name="dataset" value="memory" checked> Memory</label>
                 <label><input type="radio" name="dataset" value="keys"> Keys</label>
                 <label><input type="radio" name="dataset" value="hits"> Hits</label>
-                <label><input type="radio" name="dataset" value="restarts"> Restarts</label>
             </form>
 
             <div id="stats"></div>
