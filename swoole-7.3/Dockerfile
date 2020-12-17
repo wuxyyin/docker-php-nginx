@@ -14,6 +14,7 @@ RUN apk --no-cache add php-pear php7-dev gcc g++ make && \
     pecl channel-update pecl.php.net && \
     pecl install swoole && \
     pecl install redis && \
+    pecl install yac && \
     rm -rf /tmp/pear && \
     apk del php-pear php7-dev gcc g++ make
 

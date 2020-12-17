@@ -13,6 +13,7 @@ RUN apk --no-cache add php7 php7-fpm php7-mysqli php7-json php7-openssl php7-cur
 RUN apk --no-cache add php-pear php7-dev gcc g++ make && \
     pecl channel-update pecl.php.net && \
     pecl install redis && \
+    pecl install yac && \
     rm -rf /tmp/pear && \
     apk del php-pear php7-dev gcc g++ make
 
