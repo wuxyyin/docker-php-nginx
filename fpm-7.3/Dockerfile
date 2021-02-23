@@ -33,7 +33,8 @@ COPY config/supervisor/conf.d/ /etc/supervisor/conf.d/
 RUN chown -R nginx.nginx /run && \
   chown -R nginx.nginx /var/lib/nginx && \
   chown -R nginx.nginx /var/tmp/nginx && \
-  chown -R nginx.nginx /var/log/nginx
+  chown -R nginx.nginx /var/log/nginx && \
+  sed -i "s|^expose_php[ =].*$|\expose_php = Off;|g" /etc/php7/php.ini
 
 # Setup document root
 RUN mkdir -p /app
